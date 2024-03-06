@@ -1,11 +1,14 @@
 import contextlib
 from typing import AsyncIterator
-from sqlalchemy.orm import declarative_base
-from sqlalchemy.ext.asyncio import (AsyncConnection, AsyncSession,
+from sqlalchemy.orm import DeclarativeBase
+from sqlalchemy.ext.asyncio import (AsyncAttrs, AsyncConnection, AsyncSession,
                                     async_sessionmaker, create_async_engine)
 from app.core.config import settings
 
-Base = declarative_base()
+
+# TODO tray normal DeclarativeBase, not AsyncAttrs + DeclarativeBase
+class Base(AsyncAttrs, DeclarativeBase):
+    pass
 
 
 class DatabaseSessionManager:
