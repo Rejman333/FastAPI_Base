@@ -5,6 +5,7 @@ class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file="../.env", case_sensitive=True)
 
     PROJECT_NAME: str
+    TITLE: str
     ENV: str = "dev"
 
     DB_HOST: str
