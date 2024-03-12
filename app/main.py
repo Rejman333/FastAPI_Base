@@ -7,7 +7,7 @@ from app.core.config import settings
 from app.core.db import sessionmanager
 
 from contextlib import asynccontextmanager
-from app.models import User
+from app.models import user
 
 
 @asynccontextmanager
