@@ -14,7 +14,7 @@ ModelType = TypeVar("ModelType", bound=Base)
 CreateSchemaType = TypeVar("CreateSchemaType", bound=BaseModel)
 UpdateSchemaType = TypeVar("UpdateSchemaType", bound=BaseModel)
 ResponseSchemaType = TypeVar("ResponseSchemaType", bound=BaseModel)
-ListResponseSchemaType = TypeVar("ListResponseSchemaType", bound=BaseModel)
+ListResponseSchemaType = TypeVar("ListResponseSchemaType", bound=List[BaseModel])
 
 
 class CRUDAsyncBase(Generic[
