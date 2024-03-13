@@ -91,7 +91,7 @@ class CRUDAsyncBase(Generic[
             raise SoftDeleteError()
 
         model.deleted_at = datetime.datetime.now(tz=datetime.timezone.utc)
-        await db.add(model)
+        db.add(model)
         await db.flush()
         await db.refresh(model)
         return model
