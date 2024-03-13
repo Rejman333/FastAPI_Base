@@ -1,9 +1,16 @@
 from sqlalchemy import String
 from sqlalchemy.orm import Mapped, mapped_column
-from app.core.db import Base
+
+from app.models.base import ModelSoftDelete
 
 
-class User(Base):
-    __tablename__ = "Users"
-    id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True, index=True)
-    username: Mapped[str] = mapped_column(String(30), index=True, unique=True)
+class User(ModelSoftDelete):
+    email: Mapped[str] = mapped_column((String(160)), unique=True)
+    hashed_password: Mapped[str] = mapped_column(String)
+    is_superuser: Mapped[bool] = mapped_column(default=False, nullable=False)
+    is_verified: Mapped[bool] = mapped_column(default=False, nullable=False)
+
+    def __init__(self, **kwargs):
+        if 'password' in kwargs:
+            kwargs['hashed_password'] = kwargs.pop('password')
+        super().__init__(**kwargs)
