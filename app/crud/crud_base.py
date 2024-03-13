@@ -14,25 +14,21 @@ ModelType = TypeVar("ModelType", bound=Base)
 CreateSchemaType = TypeVar("CreateSchemaType", bound=BaseModel)
 UpdateSchemaType = TypeVar("UpdateSchemaType", bound=BaseModel)
 ResponseSchemaType = TypeVar("ResponseSchemaType", bound=BaseModel)
-ListResponseSchemaType = TypeVar("ListResponseSchemaType", bound=List[BaseModel])
 
 
 class CRUDAsyncBase(Generic[
                         ModelType,
                         CreateSchemaType,
                         UpdateSchemaType,
-                        ResponseSchemaType,
-                        ListResponseSchemaType,
+                        ResponseSchemaType
                     ]):
     def __init__(
             self,
             model_class: type[ModelType],
             response_schema_class: type[ResponseSchemaType],
-            list_response_class: type[ListResponseSchemaType],
     ) -> None:
         self.model_class = model_class
         self.response_schema_class = response_schema_class
-        self.list_response_class = list_response_class
 
     # ToDo Test This
     async def create(self, db: AsyncSession, *, create_schema: CreateSchemaType) -> ModelType:
